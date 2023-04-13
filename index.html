@@ -3,12 +3,13 @@
   <head>
     <meta charset="UTF-8">
 	<link rel="stylesheet" href="styles/main.css">
-    <title>Pedometer Web App</title>
+    <title>Step Counter Web App</title>
   </head>
   <body>
     <h1>Pedometer Web App</h1>
     <p>Step count: <span id="step-count">0</span></p>
     <script>
+
 // Request permission to access the device's accelerometer data
 if (typeof DeviceMotionEvent.requestPermission === 'function') {
     DeviceMotionEvent.requestPermission().then(permissionState => {
@@ -37,7 +38,7 @@ if (typeof DeviceMotionEvent.requestPermission === 'function') {
       accelerationZ * accelerationZ
     );
     
-    const threshold = 10; // Adjust this value to fit your walking style
+    const threshold = 1; // Adjust this value to fit your walking style
     let stepCount = 0;
     
     if (motion > threshold) {
@@ -46,6 +47,7 @@ if (typeof DeviceMotionEvent.requestPermission === 'function') {
     
     // Display the step count
     document.getElementById('step-count').innerHTML = stepCount;
-  }    </script>
+  }    
+  </script>
   </body>
 </html>
