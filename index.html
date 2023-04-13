@@ -11,6 +11,8 @@
     <script>
 
 // Request permission to access the device's accelerometer data
+const threshold = 10; // Adjust this value to fit your walking style
+    let stepCount = 0;
 if (typeof DeviceMotionEvent.requestPermission === 'function') {
     DeviceMotionEvent.requestPermission().then(permissionState => {
       if (permissionState === 'granted') {
@@ -38,8 +40,7 @@ if (typeof DeviceMotionEvent.requestPermission === 'function') {
       accelerationZ * accelerationZ
     );
     
-    const threshold = 10; // Adjust this value to fit your walking style
-    let stepCount = 0;
+  
     
     if (motion > threshold) {
       stepCount += 5;
