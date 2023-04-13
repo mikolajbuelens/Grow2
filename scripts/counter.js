@@ -26,7 +26,7 @@ if (typeof DeviceMotionEvent.requestPermission === 'function') {
       accelerationZ * accelerationZ
     );
     
-    const threshold = 10; // Adjust this value to fit your walking style
+    const threshold = 1; // Adjust this value to fit your walking style
     let stepCount = 0;
     
     if (motion > threshold) {
