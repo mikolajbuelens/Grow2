@@ -1,49 +1,38 @@
-"use strict";
-(function(){
-
-	function Countstep(){
-	   this.init();
-	   return this.count;
-
-	}
-
-Countstep.prototype={
-	init:function(){
-		var _this=this;
-		_this.flag=false;
-		_this.count=[];
-		_this.count[0]=0;
-	   function motionHandler(event) {  
-	   		 var accGravity = event.accelerationIncludingGravity;  
-	   		 _this.yg=accGravity.y;
-	   		 return false;
-	   }
-	    function orientationHandler(event){
-	    	 if ((_this.yg-10*Math.sin(event.beta*Math.PI/180))>1) {
-                 _this.flag=true;
-             }
-             if((_this.yg-10*Math.sin(event.beta*Math.PI/180))<-1){
-                     if(_this.flag==true){
-                        _this.count[0]++;
-                        _this.flag=false;  
-                      
-                     }
-                     
-                 }
-	    }
- 
-	     if (window.DeviceMotionEvent&&window.DeviceOrientationEvent) {  
-          window.addEventListener("devicemotion",motionHandler, false); 
-          window.addEventListener("deviceorientation",orientationHandler, false); 
-          return _this.count;
-        }
-         else {  
-          alert('Test');
-        }  
-
-	},
-
-
-};
-  window.Countstep=Countstep;
-})();
+// Request permission to access the device's accelerometer data
+if (typeof DeviceMotionEvent.requestPermission === 'function') {
+    DeviceMotionEvent.requestPermission().then(permissionState => {
+      if (permissionState === 'granted') {
+        window.addEventListener('devicemotion', deviceMotionHandler);
+      }
+    }).catch(console.error);
+  } else {
+    window.addEventListener('devicemotion', deviceMotionHandler);
+  }
+  
+  // Listen to the device's accelerometer data
+  let accelerationX = 0;
+  let accelerationY = 0;
+  let accelerationZ = 0;
+  
+  function deviceMotionHandler(event) {
+    accelerationX = event.accelerationIncludingGravity.x;
+    accelerationY = event.accelerationIncludingGravity.y;
+    accelerationZ = event.accelerationIncludingGravity.z;
+  
+    // Process the accelerometer data
+    const motion = Math.sqrt(
+      accelerationX * accelerationX +
+      accelerationY * accelerationY +
+      accelerationZ * accelerationZ
+    );
+    
+    const threshold = 10; // Adjust this value to fit your walking style
+    let stepCount = 0;
+    
+    if (motion > threshold) {
+      stepCount++;
+    }
+    
+    // Display the step count
+    document.getElementById('step-count').innerHTML = stepCount;
+  }

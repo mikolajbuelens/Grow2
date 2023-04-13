@@ -2,7 +2,7 @@
   "esversion": 8,
   "browser": true,
   "devel": true,
-  "strict": "global",
+  // "strict": "global",
   "globals": {
       "console": true
   }
