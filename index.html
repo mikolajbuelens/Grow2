@@ -11,44 +11,35 @@
     <script>
 
 // Request permission to access the device's accelerometer data
-const threshold = 10; // Adjust this value to fit your walking style
-    let stepCount = 0;
-if (typeof DeviceMotionEvent.requestPermission === 'function') {
-    DeviceMotionEvent.requestPermission().then(permissionState => {
-      if (permissionState === 'granted') {
-        window.addEventListener('devicemotion', deviceMotionHandler);
-      }
-    }).catch(console.error);
-  } else {
-    window.addEventListener('devicemotion', deviceMotionHandler);
-  }
-  
-  // Listen to the device's accelerometer data
-  let accelerationX = 0;
-  let accelerationY = 0;
-  let accelerationZ = 0;
-  
-  function deviceMotionHandler(event) {
-    accelerationX = event.accelerationIncludingGravity.x;
-    accelerationY = event.accelerationIncludingGravity.y;
-    accelerationZ = event.accelerationIncludingGravity.z;
-  
-    // Process the accelerometer data
-    const motion = Math.sqrt(
-      accelerationX * accelerationX +
-      accelerationY * accelerationY +
-      accelerationZ * accelerationZ
-    );
-    
-  
-    
-    if (motion > threshold) {
-      stepCount += 5;
+// Initialize variables
+var lastPeak = 0;
+var threshold = 10; // Adjust this threshold as needed
+var stepCount = 0;
+
+// Handle device motion events
+window.addEventListener('devicemotion', function(event) {
+  // Extract acceleration data
+  var acceleration = event.accelerationIncludingGravity;
+
+  // Calculate magnitude of acceleration vector
+  var accelerationMagnitude = Math.sqrt(acceleration.x * acceleration.x +
+                                          acceleration.y * acceleration.y +
+                                          acceleration.z * acceleration.z);
+
+  // Check if acceleration exceeds threshold
+  if (accelerationMagnitude > threshold) {
+    // Check if this is a new peak
+    if (accelerationMagnitude > lastPeak) {
+      // Increment step count
+      stepCount++;
+      lastPeak = accelerationMagnitude;
     }
-    
-    // Display the step count
-    document.getElementById('step-count').innerHTML = stepCount;
-  }    
+  }
+
+  // Update step count display
+  document.getElementById('step-count').innerHTML = stepCount;
+});
+  
   </script>
   </body>
 </html>
