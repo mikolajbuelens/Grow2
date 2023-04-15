@@ -1,16 +1,154 @@
+.wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.circle{
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    background-color: #ccc;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #323749;
+    /* border-color:  #535563; */
+    /* border-style: solid; */
+    /* border-width: 10px; */
+    box-shadow: white inset 0px -20px 25px 0px; 
+}
+.outerCircle{
+    width: 220px;
+    height: 220px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 10px solid white;
+    border-radius: 50%;
+    box-shadow: grey 0px 4px 0px 5px;
+}
+    /* border-width: 0px 0px 10px 0px; */
+
+    /* stoke */
+    /* border-radius: 100%; */
+    /* width: 200px;
+    height: 200px;
+
+    background-color: red; */
+/* } */
 .steps {
 font-family: Arial, Helvetica, sans-serif;
 font-size: 50px;
+text-align: center;
+
+color: white;
 display: flex;
 flex-direction: column;
 justify-content: center;
 align-items: center;
 height: 100vh;
 /* height: 100%; */
-color: white;
 }
 
 body {
     /* background-color: rgb(30, 123, 228); */
     background: radial-gradient(circle at center, #535563, #323749);
 }
+.outerCircle {
+    position: relative;
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    border: 5px solid #ccc;
+    overflow: hidden;
+  }
+  
+  /* .innerCircle {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    bottom: 5px;
+    left: 5px;
+    border-radius: 50%;
+    background-color: #fff;
+  } */
+  
+  .progression {
+    position: fixed;
+    width: 280px;
+    height: 280px;
+  }
+  
+  svg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+  }
+  
+  .progression-bg {
+    fill: none;
+    
+    stroke: #ddd;
+    stroke-width: 10;
+    stroke-dasharray: 440;
+    stroke-dashoffset: 0;
+    transition: stroke-dashoffset 0.5s ease;
+  }
+  
+  .progression-progress {
+    fill: none;
+    stroke: #0359F6;
+
+    stroke-width: 10;
+    stroke-linecap: round;
+    stroke-dasharray: 440;
+    stroke-dashoffset: 0;
+    transition: stroke-dashoffset 0.5s ease;
+    box-shadow: green 10px 10px 5px 5px !important;
+
+  }
+  body {
+    overflow: hidden !important;
+  }
+  /* .progression-text {
+    color: #4CAF50;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    font-size: 24px;
+  } */
+  
+  .progression-value {
+    font-weight: bold;
+  }
+  
+  .progression-percent {
+    font-size: 16px;
+    margin-left: 4px;
+  }
+
+nav {
+    color: #ccc;
+    /* width: fit-content;
+    height: fit-content; */
+    padding: 5px;
+/* border: #0359F6; */
+/* border-style: solid; */
+border-radius: 10px;
+box-shadow: inset white -3px -3px 6px 0px,
+rgba(0, 0, 0, 0.432) -2px -2px 5px 1px;
+
+}
+
+  .navWrap {
+    display: flex;
+    justify-content: space-between;
+    margin: 20px;
+  }

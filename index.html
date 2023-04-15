@@ -5,6 +5,7 @@
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="styles/main.css">
+	<script src="scripts/animation.js" ></script>
 	<!-- <style>
 		#distance {
 			font-size: 24px;
@@ -17,10 +18,29 @@
 <body>
 	<!-- <h1>Distance Measuring App</h1> -->
 	<!-- <p>Start walking to measure your distance:</p> -->
+	<div class="navWrap">
+	<nav><img src="icons/account.svg" alt=""></nav>
+	<nav><img src="icons/calendar.svg" alt=""></nav>
+</div>
+	<div class="wrapper">
+		<div class="outerCircle">
+	<div class="circle">
+		<div class="progression">
+			<svg viewBox="0 0 300 400">
+		   <circle cx="50%" cy="50%" r="48%" stroke="#ddd" stroke-width="4" fill="none" />
+		   <circle class="progression-progress" cx="50%" cy="50%" r="48%" stroke="red" stroke-width="8" stroke-dasharray="0 100%" fill="none" />
+			   <div class="progression-text">
+				 <span class="progression-value">50</span>
+				 <span class="progression-percent">%</span>
+			   </div>
+			</svg>
+			 </div>
 	<div class="steps">
 	<div id="steps">0</div> 
-	<!-- <p><br></p> -->
 	<div id="distance"> 0 km</div>
+</div>
+</div>
+</div>
 </div>
 	<script src="scripts/stepCounter.js"></script>
 </body>
