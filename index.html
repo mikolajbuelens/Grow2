@@ -1,45 +1,27 @@
 <!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8">
+<html>
+<head>
+	<title>Distance Measuring App</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="styles/main.css">
-    <title>Step Counter Web App</title>
-  </head>
-  <body>
-    <h1>step Counter Web App</h1>
-    <p>Step count: <span id="step-count">0</span></p>
-    <script>
-
-// Request permission to access the device's accelerometer data
-// Initialize variables
-var lastPeak = 0;
-var threshold = 10; // Adjust this threshold as needed
-var stepCount = 0;
-
-// Handle device motion events
-window.addEventListener('devicemotion', function(event) {
-  // Extract acceleration data
-  var acceleration = event.accelerationIncludingGravity;
-
-  // Calculate magnitude of acceleration vector
-  var accelerationMagnitude = Math.sqrt(acceleration.x * acceleration.x +
-                                          acceleration.y * acceleration.y +
-                                          acceleration.z * acceleration.z);
-
-  // Check if acceleration exceeds threshold
-  if (accelerationMagnitude > threshold) {
-    // Check if this is a new peak
-    if (accelerationMagnitude > lastPeak) {
-      // Increment step count
-      stepCount++;
-      lastPeak = accelerationMagnitude;
-    }
-  }
-
-  // Update step count display
-  document.getElementById('step-count').innerHTML = stepCount;
-});
-  
-  </script>
-  </body>
+	<!-- <style>
+		#distance {
+			font-size: 24px;
+			font-weight: bold;
+			text-align: center;
+			margin-top: 50px;
+		}
+	</style> -->
+</head>
+<body>
+	<!-- <h1>Distance Measuring App</h1> -->
+	<!-- <p>Start walking to measure your distance:</p> -->
+	<div class="steps">
+	<div id="steps">0</div> 
+	<!-- <p><br></p> -->
+	<div id="distance"> 0 km</div>
+</div>
+	<script src="scripts/stepCounter.js"></script>
+</body>
 </html>
