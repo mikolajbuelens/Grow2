@@ -1,31 +1,28 @@
-let distance = 0; // initial distance value
-let steps = 0; // initial step count
+let x = [];
+let y = [];
+let z = [];
+let peaks = 0;
+let threshold = 12;
 
-// Add an event listener for device motion, and calculate distance and step count with each change
-window.addEventListener('devicemotion', e => {
-  const { x, y, z } = e.accelerationIncludingGravity; // get acceleration values
+let stepCount = 0;
+let distanceInKm = 0;
+let stepsPerKm = 1312;
 
-  // calculate acceleration magnitude
-  const acceleration = Math.sqrt(Math.pow(x, 2) + Math.pow(y, 2) + Math.pow(z, 2));
+window.addEventListener("devicemotion", (event) => {
+  let acceleration = event.accelerationIncludingGravity;
+  x = acceleration.x;
+  y = acceleration.y;
+  z = acceleration.z;
 
-  // set threshold for step detection
-  const threshold = 10;
+  let accelerationMagnitude = Math.sqrt(x * x + y * y + z * z);
 
-  // detect peaks in acceleration data
-  const peakDetected = acceleration > threshold;
-
-  if (peakDetected) {
-    // increment step count
-    steps++;
-
-    // calculate distance based on average stride length of 0.75 meters
-    distance += 0.75;
-
-    // update the step count and distance elements on the HTML page
-    const stepsElement = document.getElementById('steps');
-    stepsElement.textContent = steps;
-
-    const distanceElement = document.getElementById('distance');
-    distanceElement.textContent = `${distance.toFixed(2)} km`;
+  if (accelerationMagnitude > threshold) {
+    peaks++;
+    if (peaks > 1 && peaks % 2 == 0) {
+      stepCount++;
+      distanceInKm = stepCount / stepsPerKm;
+      document.getElementById("distance").innerHTML = distanceInKm.toFixed(2) + " km";
+      document.getElementById("steps").innerHTML = stepCount + " steps";
+    }
   }
 });
